@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./Challenge.module.scss";
+import "./style.scss";
 import "../../../node_modules/nes.css/css/nes.css";
 
 const axios = require("axios");
@@ -76,11 +77,20 @@ function Challenge() {
         Respuestas correctas: {score}/{counter}
       </p>
       <img
-        className={`${correctAnswer ? `knownPokemon` : `unknownPokemon`} ${styles.pokeimg}`}
+        className={`${correctAnswer ? `knownPokemon` : `unknownPokemon`} ${
+          styles.pokeimg
+        }`}
         src={pokemonData.pokemon_img}
       />
-      <input type="text" className="nes-input" onChange={handleChange} value={input}></input>
-      <button className="nes-btn main-btn" onClick={handleClick}>Enviar</button>
+      <input
+        type="text"
+        className="nes-input"
+        onChange={handleChange}
+        value={input}
+      ></input>
+      <button className="nes-btn main-btn" onClick={handleClick}>
+        Enviar
+      </button>
       {correctAnswer && <p>respuesta correcta</p>}
     </div>
   );
