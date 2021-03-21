@@ -20,7 +20,7 @@ function Challenge() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
   function getRandomPokemon() {
-    let n = Math.floor(Math.random() * 100);
+    let n = Math.floor(Math.random() * 150);
     return n;
   }
 
@@ -49,7 +49,7 @@ function Challenge() {
     setTimeout(() => {
       nextPokemon();
       setInput("");
-    }, 3000);
+    }, 1500);
   }
 
   function checkAnswer(answer) {
@@ -88,10 +88,15 @@ function Challenge() {
         onChange={handleChange}
         value={input}
       ></input>
-      <button className="nes-btn main-btn" onClick={handleClick}>
+      <button
+        className={`nes-btn main-btn ${styles.button}`}
+        onClick={handleClick}
+      >
         Enviar
       </button>
-      {correctAnswer && <p className="is-success">respuesta correcta</p>}
+      {correctAnswer && (
+        <p className="nes-text is-success">respuesta correcta</p>
+      )}
     </div>
   );
 }

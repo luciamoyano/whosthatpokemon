@@ -1,24 +1,20 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import styles from "./Score.modules.scss";
+import "./style.scss";
+
+import lowscore from "../../assets/meme/lowScore.mp4";
 
 function Score() {
   const { score } = useParams();
   let message = "";
   if (score < 4) {
     message = (
-      <>
-        <p>sos literal este</p>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/IfQumd_o0Gk"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </>
+      <div>
+        <h3 className="title">No tenés idea</h3>
+        <video width="500" height="315" controls autoplay>
+          <source src={lowscore} />
+        </video>
+      </div>
     );
   } else if (score > 7) {
     message = <p>pokemon master</p>;
@@ -26,9 +22,10 @@ function Score() {
     message = <p>ponele</p>;
   }
   return (
-    <div className={styles.container}>
+    <div className="container">
       <p>Respuestas correctas: {score}</p>
       {message}
+      <h3 className="gracias">¡GRACIAS POR JUGAR!</h3>
     </div>
   );
 }
