@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 const axios = require("axios");
 
 function Challenge() {
+  const history = useHistory();
   const [pokemonData, setPokemonData] = useState({
     pokemon_name: "",
     pokemon_img: "",
@@ -12,7 +14,7 @@ function Challenge() {
   const [score, setScore] = useState(0);
 
   const [input, setInput] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState(false);
 
   function getRandomPokemon() {
     for (let i = 0; i < 1; i++) {
@@ -41,19 +43,26 @@ function Challenge() {
   }
 
   function handleClick() {
-    setAnswer(input);
-    if (answer == pokemonData.pokemon_name) {
-      setScore((prevStatus) => prevStatus + 1);
-    }
+    checkAnswer(input);
     setCounter((prevStatus) => prevStatus + 1);
     nextPokemon();
   }
 
+  function checkAnswer(answer) {
+    if (answer == pokemonData.pokemon_name) {
+      setScore((prevStatus) => prevStatus + 1);
+      setCorrectAnswer(true);
+    }
+  }
+
   function nextPokemon() {
+    setCorrectAnswer(false);
     fetchData();
   }
 
-  console.log(answer);
+  if (counter === 10) {
+    history.push(`/score/${score}`);
+  }
 
   return (
     <div>
@@ -61,9 +70,9 @@ function Challenge() {
         Respuestas correctas: {score}/{counter}
       </p>
       <img src={pokemonData.pokemon_img} />
-      <p>{pokemonData.pokemon_name}</p>
       <input type="text" onChange={handleChange}></input>
       <button onClick={handleClick}>Enviar</button>
+      {correctAnswer && <p>respuesta correcta</p>}
     </div>
   );
 }

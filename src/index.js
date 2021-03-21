@@ -13,7 +13,7 @@ ReactDOM.render(
   <Router>
     <Route exact path="/" component={Home} />
     <Route exact path="/challenge" component={Challenge} />
-    <Route exact path="/score" component={Score} />
+    <Route exact path="/score/:score" component={Score} />
   </Router>,
   document.getElementById("root")
 );
