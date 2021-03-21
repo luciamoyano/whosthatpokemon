@@ -20,10 +20,8 @@ function Challenge() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
   function getRandomPokemon() {
-    for (let i = 0; i < 1; i++) {
-      let n = Math.floor(Math.random() * 100);
-      return n;
-    }
+    let n = Math.floor(Math.random() * 100);
+    return n;
   }
 
   const id = getRandomPokemon();
@@ -47,12 +45,11 @@ function Challenge() {
 
   function handleClick() {
     checkAnswer(input);
-    revealPokemon();
+    setCounter((prevStatus) => prevStatus + 1);
     setTimeout(() => {
-      setInput("");
-      setCounter((prevStatus) => prevStatus + 1);
       nextPokemon();
-    }, 1000);
+      setInput("");
+    }, 3000);
   }
 
   function checkAnswer(answer) {
@@ -78,16 +75,12 @@ function Challenge() {
       <p>
         Respuestas correctas: {score}/{counter}
       </p>
-      <img className={styles.pokeimg} src={pokemonData.pokemon_img} />
-      <input
-        type="text"
-        className="nes-input"
-        onChange={handleChange}
-        value={input}
-      ></input>
-      <button className="nes-btn main-btn" onClick={handleClick}>
-        Enviar
-      </button>
+      <img
+        className={`${correctAnswer ? `knownPokemon` : `unknownPokemon`} ${styles.pokeimg}`}
+        src={pokemonData.pokemon_img}
+      />
+      <input type="text" className="nes-input" onChange={handleChange} value={input}></input>
+      <button className="nes-btn main-btn" onClick={handleClick}>Enviar</button>
       {correctAnswer && <p>respuesta correcta</p>}
     </div>
   );

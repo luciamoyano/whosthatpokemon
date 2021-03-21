@@ -19,3 +19,13 @@
     margin: 50px auto;
     filter: brightness(0%)
 }
+
+.unknownPokemon {
+    filter: brightness(0);
+  }
+  
+  .knownPokemon {
+    transition: all 300ms ease-in-out;
+    filter: brightness(1);
+  }
+  
