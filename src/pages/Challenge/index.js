@@ -43,9 +43,14 @@ function Challenge() {
   function handleClick() {
     setAnswer(input);
     if (answer == pokemonData.pokemon_name) {
-      setScore(score + 1);
+      setScore((prevStatus) => prevStatus + 1);
     }
-    setCounter(counter + 1);
+    setCounter((prevStatus) => prevStatus + 1);
+    nextPokemon();
+  }
+
+  function nextPokemon() {
+    fetchData();
   }
 
   console.log(answer);
