@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "./style.scss";
 const axios = require("axios");
 
 function Challenge() {
@@ -17,10 +18,8 @@ function Challenge() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
   function getRandomPokemon() {
-    for (let i = 0; i < 1; i++) {
-      let n = Math.floor(Math.random() * 100);
-      return n;
-    }
+    let n = Math.floor(Math.random() * 100);
+    return n;
   }
 
   const id = getRandomPokemon();
@@ -45,7 +44,9 @@ function Challenge() {
   function handleClick() {
     checkAnswer(input);
     setCounter((prevStatus) => prevStatus + 1);
-    nextPokemon();
+    setTimeout(() => {
+      nextPokemon();
+    }, 3000);
   }
 
   function checkAnswer(answer) {
@@ -69,7 +70,10 @@ function Challenge() {
       <p>
         Respuestas correctas: {score}/{counter}
       </p>
-      <img src={pokemonData.pokemon_img} />
+      <img
+        className={`${correctAnswer ? `knownPokemon` : `unknownPokemon`}`}
+        src={pokemonData.pokemon_img}
+      />
       <input type="text" onChange={handleChange}></input>
       <button onClick={handleClick}>Enviar</button>
       {correctAnswer && <p>respuesta correcta</p>}
