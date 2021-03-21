@@ -8,6 +8,12 @@ function Challenge() {
     pokemon_img: "",
   });
 
+  const [counter, setCounter] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const [input, setInput] = useState("");
+  const [answer, setAnswer] = useState("");
+
   function getRandomPokemon() {
     for (let i = 0; i < 1; i++) {
       let n = Math.floor(Math.random() * 100);
@@ -20,17 +26,39 @@ function Challenge() {
   async function fetchData() {
     const pokeData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const pokemons = pokeData.data;
-    console.log(pokemons.sprites.other.dream_world.front_default);
-    setPokemonData(pokemons);
+    setPokemonData({
+      pokemon_name: pokemons.name,
+      pokemon_img: pokemons.sprites.other.dream_world.front_default,
+    });
   }
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  function handleChange(e) {
+    setInput(e.target.value);
+  }
+
+  function handleClick() {
+    setAnswer(input);
+    if (answer == pokemonData.pokemon_name) {
+      setScore(score + 1);
+    }
+    setCounter(counter + 1);
+  }
+
+  console.log(answer);
+
   return (
     <div>
-      <p>Challenge page</p>
+      <p>
+        Respuestas correctas: {score}/{counter}
+      </p>
+      <img src={pokemonData.pokemon_img} />
+      <p>{pokemonData.pokemon_name}</p>
+      <input type="text" onChange={handleChange}></input>
+      <button onClick={handleClick}>Enviar</button>
     </div>
   );
 }
