@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import styles from "./Challenge.module.scss";
+import "../../../node_modules/nes.css/css/nes.css";
+
 const axios = require("axios");
 
 function Challenge() {
@@ -44,8 +47,12 @@ function Challenge() {
 
   function handleClick() {
     checkAnswer(input);
-    setCounter((prevStatus) => prevStatus + 1);
-    nextPokemon();
+    revealPokemon();
+    setTimeout(() => {
+      setInput("");
+      setCounter((prevStatus) => prevStatus + 1);
+      nextPokemon();
+    }, 1000);
   }
 
   function checkAnswer(answer) {
@@ -60,18 +67,27 @@ function Challenge() {
     fetchData();
   }
 
+  function revealPokemon() {}
+
   if (counter === 10) {
     history.push(`/score/${score}`);
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <p>
         Respuestas correctas: {score}/{counter}
       </p>
-      <img src={pokemonData.pokemon_img} />
-      <input type="text" onChange={handleChange}></input>
-      <button onClick={handleClick}>Enviar</button>
+      <img className={styles.pokeimg} src={pokemonData.pokemon_img} />
+      <input
+        type="text"
+        className="nes-input"
+        onChange={handleChange}
+        value={input}
+      ></input>
+      <button className="nes-btn main-btn" onClick={handleClick}>
+        Enviar
+      </button>
       {correctAnswer && <p>respuesta correcta</p>}
     </div>
   );
