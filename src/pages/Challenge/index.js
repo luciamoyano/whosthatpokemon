@@ -27,12 +27,18 @@ function Challenge() {
   const id = getRandomPokemon();
 
   async function fetchData() {
-    const pokeData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const pokemons = pokeData.data;
-    setPokemonData({
-      pokemon_name: pokemons.name,
-      pokemon_img: pokemons.sprites.other.dream_world.front_default,
-    });
+    try {
+      const pokeData = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${id}`
+      );
+      const pokemons = pokeData.data;
+      setPokemonData({
+        pokemon_name: pokemons.name,
+        pokemon_img: pokemons.sprites.other.dream_world.front_default,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -69,7 +75,7 @@ function Challenge() {
   if (counter === 10) {
     history.push(`/score/${score}`);
   }
-
+  console.log(pokemonData.pokemon_name);
   return (
     <div className={styles.container}>
       <p>
