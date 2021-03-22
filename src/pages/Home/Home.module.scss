@@ -18,5 +18,9 @@
     :hover {
       text-decoration: none;
     }
+
+    @media (min-width: 320px) {
+      font-size: 0.8rem;
+    }
   }
 }
