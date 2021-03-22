@@ -79,7 +79,6 @@ function Challenge() {
       history.push(`/score/${score}`);
     }, 1000);
   }
-  console.log(pokemonData.pokemon_name);
   return (
     <div className={styles.container}>
       <p>
