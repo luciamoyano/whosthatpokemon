@@ -20,19 +20,25 @@ function Challenge() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
   function getRandomPokemon() {
-    let n = Math.floor(Math.random() * 100);
+    let n = Math.floor(Math.random() * 150);
     return n;
   }
 
   const id = getRandomPokemon();
 
   async function fetchData() {
-    const pokeData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const pokemons = pokeData.data;
-    setPokemonData({
-      pokemon_name: pokemons.name,
-      pokemon_img: pokemons.sprites.other.dream_world.front_default,
-    });
+    try {
+      const pokeData = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${id}`
+      );
+      const pokemons = pokeData.data;
+      setPokemonData({
+        pokemon_name: pokemons.name,
+        pokemon_img: pokemons.sprites.other.dream_world.front_default,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -40,23 +46,27 @@ function Challenge() {
   }, []);
 
   function handleChange(e) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput(value.toLowerCase());
+    if (value === pokemonData.pokemon_name) {
+      setCorrectAnswer(true);
+
+      setTimeout(() => {
+        setScore((prevStatus) => prevStatus + 1);
+        setCounter((prevStatus) => prevStatus + 1);
+        nextPokemon();
+        setInput("");
+      }, 1500);
+    }
   }
 
   function handleClick() {
-    checkAnswer(input);
-    setCounter((prevStatus) => prevStatus + 1);
+    setCorrectAnswer(false);
     setTimeout(() => {
       nextPokemon();
       setInput("");
-    }, 3000);
-  }
-
-  function checkAnswer(answer) {
-    if (answer == pokemonData.pokemon_name) {
-      setScore((prevStatus) => prevStatus + 1);
-      setCorrectAnswer(true);
-    }
+      setCounter((prevStatus) => prevStatus + 1);
+    }, 1500);
   }
 
   function nextPokemon() {
@@ -64,12 +74,12 @@ function Challenge() {
     fetchData();
   }
 
-  function revealPokemon() {}
-
   if (counter === 10) {
-    history.push(`/score/${score}`);
+    setTimeout(() => {
+      history.push(`/score/${score}`);
+    }, 1000);
   }
-
+  console.log(pokemonData.pokemon_name);
   return (
     <div className={styles.container}>
       <p>
@@ -88,10 +98,15 @@ function Challenge() {
         onChange={handleChange}
         value={input}
       ></input>
-      <button className="nes-btn main-btn" onClick={handleClick}>
-        Enviar
+      <button
+        className={`nes-btn main-btn ${styles.button}`}
+        onClick={handleClick}
+      >
+        SKIP
       </button>
-      {correctAnswer && <p className="is-success">respuesta correcta</p>}
+      {correctAnswer && (
+        <p className="nes-btn is-primary">RESPUESTA CORRECTA</p>
+      )}
     </div>
   );
 }
