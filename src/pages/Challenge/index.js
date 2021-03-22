@@ -62,10 +62,10 @@ function Challenge() {
 
   function handleClick() {
     setCorrectAnswer(false);
+    setInput("");
+    setCounter((prevStatus) => prevStatus + 1);
     setTimeout(() => {
       nextPokemon();
-      setInput("");
-      setCounter((prevStatus) => prevStatus + 1);
     }, 1500);
   }
 
@@ -97,12 +97,14 @@ function Challenge() {
         onChange={handleChange}
         value={input}
       ></input>
-      <button
-        className={`nes-btn main-btn ${styles.button}`}
-        onClick={handleClick}
-      >
-        SKIP
-      </button>
+      {counter < 10 && (
+        <button
+          className={`nes-btn main-btn ${styles.button}`}
+          onClick={handleClick}
+        >
+          SKIP
+        </button>
+      )}
       {correctAnswer && (
         <p className="nes-btn is-primary">RESPUESTA CORRECTA</p>
       )}
