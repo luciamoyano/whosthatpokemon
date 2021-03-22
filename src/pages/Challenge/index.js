@@ -50,10 +50,10 @@ function Challenge() {
     setInput(value.toLowerCase());
     if (value === pokemonData.pokemon_name) {
       setCorrectAnswer(true);
-      setScore((prevStatus) => prevStatus + 1);
-      setCounter((prevStatus) => prevStatus + 1);
 
       setTimeout(() => {
+        setScore((prevStatus) => prevStatus + 1);
+        setCounter((prevStatus) => prevStatus + 1);
         nextPokemon();
         setInput("");
       }, 1500);
@@ -62,10 +62,10 @@ function Challenge() {
 
   function handleClick() {
     setCorrectAnswer(false);
-    setCounter((prevStatus) => prevStatus + 1);
     setTimeout(() => {
       nextPokemon();
       setInput("");
+      setCounter((prevStatus) => prevStatus + 1);
     }, 1500);
   }
 
