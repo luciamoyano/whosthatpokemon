@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 html {
   min-height: 100%;
 }
@@ -5,8 +6,9 @@ html {
 body {
   background: rgb(0, 0, 0);
   min-height: 100vh;
-  background-image: url('../assets/background.png');
-  background-size:cover;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  font-family: "Press Start 2P";
 }
 
 #root {

@@ -6,7 +6,8 @@ import styles from "./Home.module.scss";
 function Home() {
   return (
     <div className={styles.container}>
-      <h1>Bienvenido!</h1>
+      <h2>Bienvenido!</h2>
+      <p>Adiviná el nombre del Pokemón y ganá!</p>
       <Link className={styles.link} to="/challenge">
         Hacé click acá para jugar
       </Link>

@@ -1,6 +1,7 @@
 @import "../../styles/globals.scss";
 
 .container {
+  text-align: center;
   background: #eee;
   margin: 0 auto;
   max-width: 500px;
@@ -17,6 +18,10 @@
     &:active,
     :hover {
       text-decoration: none;
+    }
+
+    @media (min-width: 320px) {
+      font-size: 0.8rem;
     }
   }
 }
