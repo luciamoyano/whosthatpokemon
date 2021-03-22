@@ -17,9 +17,9 @@ function Score() {
       </div>
     );
   } else if (score > 7) {
-    message = <h2>POKEMON MASTER</h2>;
+    message = <h2 className="title">POKEMON MASTER</h2>;
   } else {
-    message = <p>ponele</p>;
+    message = <p>ponele, algo de idea tenés...</p>;
   }
   return (
     <div className="container">

@@ -46,11 +46,22 @@ function Challenge() {
   }, []);
 
   function handleChange(e) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput(value);
+    if (value == pokemonData.pokemon_name) {
+      setCorrectAnswer(true);
+      setScore((prevStatus) => prevStatus + 1);
+      setCounter((prevStatus) => prevStatus + 1);
+
+      setTimeout(() => {
+        nextPokemon();
+        setInput("");
+      }, 1500);
+    }
   }
 
   function handleClick() {
-    checkAnswer(input);
+    setCorrectAnswer(false);
     setCounter((prevStatus) => prevStatus + 1);
     setTimeout(() => {
       nextPokemon();
@@ -73,7 +84,9 @@ function Challenge() {
   function revealPokemon() {}
 
   if (counter === 10) {
-    history.push(`/score/${score}`);
+    setTimeout(() => {
+      history.push(`/score/${score}`);
+    }, 1500);
   }
   console.log(pokemonData.pokemon_name);
   return (
@@ -98,10 +111,10 @@ function Challenge() {
         className={`nes-btn main-btn ${styles.button}`}
         onClick={handleClick}
       >
-        Enviar
+        SKIP
       </button>
       {correctAnswer && (
-        <p className="nes-text is-success">respuesta correcta</p>
+        <p className="nes-text is-success">RESPUESTA CORRECTA</p>
       )}
     </div>
   );
