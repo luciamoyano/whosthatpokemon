@@ -13,28 +13,36 @@
   p {
     text-align: center;
     font-size: 1.2rem;
+
+    @media (min-width: 320px) {
+      font-size: 0.8rem;
+    }
   }
 }
 
-.title {
+.scoreResult {
   text-align: center;
   color: #4aa52e;
   @media (min-width: 320px) {
-    font-size: 1.95rem;
+    font-size: 0.9rem;
   }
 }
 
-.gracias {
+.thanks {
   margin-top: 25px;
   font-size: 1.6rem;
 
   @media (min-width: 320px) {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
 }
 
-.link-inicio {
+.link {
   margin-top: 20px;
   text-decoration: none;
   font-size: 1rem;
+
+  @media (min-width: 320px) {
+    font-size: 0.8rem;
+  }
 }
