@@ -47,8 +47,8 @@ function Challenge() {
 
   function handleChange(e) {
     const value = e.target.value;
-    setInput(value);
-    if (value == pokemonData.pokemon_name) {
+    setInput(value.toLowerCase());
+    if (value === pokemonData.pokemon_name) {
       setCorrectAnswer(true);
       setScore((prevStatus) => prevStatus + 1);
       setCounter((prevStatus) => prevStatus + 1);
@@ -69,24 +69,15 @@ function Challenge() {
     }, 1500);
   }
 
-  function checkAnswer(answer) {
-    if (answer == pokemonData.pokemon_name) {
-      setScore((prevStatus) => prevStatus + 1);
-      setCorrectAnswer(true);
-    }
-  }
-
   function nextPokemon() {
     setCorrectAnswer(false);
     fetchData();
   }
 
-  function revealPokemon() {}
-
   if (counter === 10) {
     setTimeout(() => {
       history.push(`/score/${score}`);
-    }, 1500);
+    }, 1000);
   }
   console.log(pokemonData.pokemon_name);
   return (
@@ -114,7 +105,7 @@ function Challenge() {
         SKIP
       </button>
       {correctAnswer && (
-        <p className="nes-text is-success">RESPUESTA CORRECTA</p>
+        <p className="nes-btn is-primary">RESPUESTA CORRECTA</p>
       )}
     </div>
   );

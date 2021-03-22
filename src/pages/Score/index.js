@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./style.scss";
 
 import lowscore from "../../assets/meme/lowScore.mp4";
@@ -26,6 +26,9 @@ function Score() {
       <p>Respuestas correctas: {score}</p>
       {message}
       <h3 className="gracias">¡GRACIAS POR JUGAR!</h3>
+      <Link className="link-inicio" to="/">
+        Regresar al Inicio
+      </Link>
     </div>
   );
 }
